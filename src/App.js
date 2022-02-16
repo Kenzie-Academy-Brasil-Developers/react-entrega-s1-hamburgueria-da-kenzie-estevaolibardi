@@ -9,7 +9,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentSale, setCurrentSale] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     fetch(`https://hamburgueria-kenzie-json-serve.herokuapp.com/products`)
@@ -22,17 +21,23 @@ function App() {
     setCurrentSale([...currentSale, product]);
   };
 
-  function handleClick(productId) {
-    const filtered = currentSale.filter((element) => element !== productId);
+  const handleClick = (productId) => {
+    const filtered = currentSale.filter(
+      (item, element) => element !== productId
+    );
     setCurrentSale(filtered);
-  }
+  };
 
-  const showProducts = (word) => {
+  const removeAll = () => {
+    setCurrentSale([]);
+  };
+
+  const showProducts = (search) => {
     setFilteredProducts(
       products.filter(
         (item) =>
-          item.category.toLowerCase() === word.toLowerCase() ||
-          item.name.toLowerCase() === word.toLowerCase()
+          item.category.toLowerCase() === search.toLowerCase() ||
+          item.name.toLowerCase() === search.toLowerCase()
       )
     );
   };
@@ -44,10 +49,15 @@ function App() {
         <div className="container-pc">
           <ProductsList
             prop={filteredProducts.length === 0 ? products : filteredProducts}
-            AddToCart={AddToCart}
+            addtoCart={AddToCart}
           />
           <div className="container-productslist">
-            <Cart pro={currentSale} />
+            <Cart
+              removeAll={removeAll}
+              currentSale={currentSale}
+              products={currentSale}
+              handleClick={handleClick}
+            />
           </div>
         </div>
       </div>

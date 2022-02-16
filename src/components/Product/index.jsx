@@ -1,7 +1,8 @@
 import "./style.css";
 import BurguerLog from "./img/burguer.png";
+import { Button } from "../Buttons";
 
-export const Product = ({ setProducts, handleClick, products, addToCart }) => {
+export const Product = ({ products, addToCart }) => {
   return (
     <div className="container-product">
       <div className="sub-container-product">
@@ -18,9 +19,7 @@ export const Product = ({ setProducts, handleClick, products, addToCart }) => {
         <span>R$</span>
         {products.price.toFixed(2)}
       </p>
-      <div className="container-btn">
-        <button onClick={addToCart}>Adicionar</button>
-      </div>
+      <Button addToCart={() => addToCart(products)} />
     </div>
   );
 };

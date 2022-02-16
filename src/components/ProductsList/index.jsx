@@ -4,7 +4,7 @@ import { Cart } from "../Cart";
 
 export const ProductsList = ({
   products,
-  addToCart,
+  addtoCart,
   currentSale,
   setCurrentSale,
   handleClick,
@@ -17,7 +17,7 @@ export const ProductsList = ({
           <Product
             key={index}
             products={element}
-            addToCart={addToCart}
+            addToCart={addtoCart}
             handleClick={handleClick}
           />
         ))}
