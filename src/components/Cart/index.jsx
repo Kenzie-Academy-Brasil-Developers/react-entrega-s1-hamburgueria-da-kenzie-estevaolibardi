@@ -6,7 +6,7 @@ import BurguerLog from "./imgs/burguer.png";
 import { useState, useEffect } from "react";
 
 export const Cart = ({ products, currentSale, handleClick, removeAll }) => {
-  console.log(products);
+  // console.log(products);
 
   if (currentSale.length === 0) {
     return (

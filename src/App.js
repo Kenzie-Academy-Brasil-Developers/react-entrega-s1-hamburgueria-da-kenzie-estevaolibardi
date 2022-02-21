@@ -18,13 +18,18 @@ function App() {
   }, []);
 
   const AddToCart = (product) => {
-    setCurrentSale([...currentSale, product]);
+    const findProd = currentSale.find((element) => element === product);
+    console.log(findProd);
+    if (findProd === undefined) {
+      setCurrentSale([...currentSale, product]);
+    }
   };
 
   const handleClick = (productId) => {
     const filtered = currentSale.filter(
       (item, element) => element !== productId
     );
+    console.log(filtered);
     setCurrentSale(filtered);
   };
 
@@ -33,7 +38,7 @@ function App() {
   };
 
   const showProducts = (search) => {
-    setFilteredProducts(
+    const x = setFilteredProducts(
       products.filter(
         (item) =>
           item.category.toLowerCase() === search.toLowerCase() ||
