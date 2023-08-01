@@ -10,6 +10,9 @@ function App() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentSale, setCurrentSale] = useState([]);
 
+  console.log(currentSale);
+  console.log(filteredProducts);
+
   useEffect(() => {
     fetch(`https://hamburgueria-kenzie-json-serve.herokuapp.com/products`)
       .then((response) => response.json())
@@ -17,19 +20,20 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  const AddToCart = (product) => {
-    const findProd = currentSale.find((element) => element === product);
-    console.log(findProd);
+  const AddToCart = (productId) => {
+    const findProd = currentSale.find((elementId) => elementId === productId);
+    // console.log(findProd);
     if (findProd === undefined) {
-      setCurrentSale([...currentSale, product]);
+      setCurrentSale([...currentSale, productId]);
     }
   };
 
   const handleClick = (productId) => {
+    // console.log(productId);
     const filtered = currentSale.filter(
       (item, element) => element !== productId
     );
-    console.log(filtered);
+    // console.log(filtered);
     setCurrentSale(filtered);
   };
 
@@ -38,7 +42,7 @@ function App() {
   };
 
   const showProducts = (search) => {
-    const x = setFilteredProducts(
+    setFilteredProducts(
       products.filter(
         (item) =>
           item.category.toLowerCase() === search.toLowerCase() ||
@@ -53,13 +57,14 @@ function App() {
         <Header showProducts={showProducts} />
         <div className="container-pc">
           <ProductsList
-            prop={filteredProducts.length === 0 ? products : filteredProducts}
+            products={
+              filteredProducts.length === 0 ? products : filteredProducts
+            }
             addtoCart={AddToCart}
           />
           <div className="container-productslist">
             <Cart
               removeAll={removeAll}
-              currentSale={currentSale}
               products={currentSale}
               handleClick={handleClick}
             />

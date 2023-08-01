@@ -5,10 +5,10 @@ import { Product } from "../Product";
 import BurguerLog from "./imgs/burguer.png";
 import { useState, useEffect } from "react";
 
-export const Cart = ({ products, currentSale, handleClick, removeAll }) => {
+export const Cart = ({ products, handleClick, removeAll }) => {
   // console.log(products);
 
-  if (currentSale.length === 0) {
+  if (products.length === 0) {
     return (
       <>
         <div className="container-cart">
@@ -65,12 +65,12 @@ export const Cart = ({ products, currentSale, handleClick, removeAll }) => {
               })}
             </div>
             <hr className="hr-style"></hr>
-            <h4 className="quant">Quantidade: {currentSale.length}</h4>
+            <h4 className="quant">Quantidade: {products.length}</h4>
             <div className="container-price">
               <span>Total</span>
               <p>
                 R$
-                {currentSale
+                {products
                   .reduce((total, acc) => (total += acc.price), 0)
                   .toFixed(2)}
               </p>
